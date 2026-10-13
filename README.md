@@ -2,54 +2,96 @@
 
 **Power BI | Business Intelligence | Financial Analysis | Profitability Optimization**
 
-An interactive Power BI project designed to evaluate restaurant-level financial performance, analyse discount expenditure, monitor SUB, and investigate gross margin drivers in a food-delivery business.
+An interactive Power BI dashboard designed to evaluate restaurant-level profitability, monitor discount efficiency, identify potential profit leakages, and support data-driven financial decisions in a food-delivery business.
 
 ## Project Overview
 
-This project explores how financial and operational data can be transformed into actionable business insights through an interactive Power BI dashboard.
+This project transforms synthetic food-delivery financial data into an interactive business intelligence solution focused on restaurant profitability and financial performance.
 
-Using a synthetic food-delivery financial dataset, the analysis focuses on the relationship between restaurant commission earnings, platform-funded discounts, delivery fees, rider earnings, payment settlement charges, and gross margin.
+The dashboard analyses restaurant commission earnings, platform-funded discounts, SUB, delivery fee revenue, rider earnings, settlement charges, and gross margin to understand how revenue and costs affect business contribution.
 
-The objective is to identify potentially unprofitable business segments, investigate discount efficiency, understand margin drivers, and support better financial and operational decision-making.
+Rather than focusing solely on order volume and sales, the project emphasises a more important business question:
 
-**Data disclaimer:** This is an independent portfolio project built using synthetic/generated data. The figures and business scenarios are illustrative, not actual company financial results. This project is not an official Pathao report and is not affiliated with Pathao.
+**How much financial contribution does the platform retain after funding discounts and covering the costs included in its margin calculation?**
+
+The dashboard is structured around two core analytical areas:
+
+- **SUB & Discount Burn Analysis:** Evaluates commission earnings against platform-funded discounts to identify restaurants with different levels of discount exposure.
+- **Gross Margin & Profitability Analysis:** Examines how revenue and cost components affect overall margin and highlights areas requiring further financial investigation.
+
+The objective is to help business stakeholders move beyond performance reporting toward identifying risks, investigating root causes, and evaluating opportunities to improve profitability.
+
+> **Data Disclaimer:** This is an independent portfolio project built using synthetic/generated data. All figures and business scenarios are illustrative and do not represent actual Pathao financial or operational performance. This project is not an official Pathao dashboard and is not affiliated with Pathao.
 
 ## Business Problem
 
-High order volume does not necessarily translate into healthy profitability. Commission revenue can be offset by platform-funded promotions, while delivery costs and payment settlement charges can further reduce the contribution earned from each order.
+A food-delivery platform can generate substantial order volume and commission revenue while experiencing weak profitability due to promotional spending, delivery subsidies, and payment processing costs.
 
-This project addresses the following business questions:
+Without a structured financial monitoring system, it can be difficult to determine:
 
-- Are restaurant commission earnings sufficient to cover platform-funded discounts?
-- Which restaurants and restaurant groups show relatively high discount burn?
-- Which business segments have weak or negative SUB?
-- How do rider earnings and delivery fee recovery affect gross margin?
-- Which restaurants, zones, or payment methods require further financial investigation?
-- How can management identify opportunities to improve profitability without unnecessarily sacrificing order volume?
+- Which restaurants consume a disproportionately high share of commission earnings through platform-funded discounts.
+- Which restaurant segments generate positive or negative SUB.
+- Whether high order volume translates into sustainable gross margin.
+- Which zones or restaurant chains have relatively weak financial performance.
+- How delivery costs and settlement charges affect the platform's contribution per order.
+- Where management should prioritise financial investigation and commercial improvements.
+
+This project addresses these challenges by consolidating key financial indicators into interactive dashboards that support restaurant-level comparisons, risk segmentation, margin analysis, and performance monitoring.
 
 ## Project Objectives
 
-- Measure restaurant-level commission earnings and discount expenditure.
-- Calculate SUB to evaluate commission earnings after platform-funded discounts.
-- Analyze gross margin and its underlying financial components.
-- Compare restaurant, chain, and zone performance.
-- Monitor monthly financial trends and changes in profitability.
-- Identify potential profit leakages and financial anomalies for further investigation.
-- Translate analytical observations into practical business recommendations.
+- Measure commission earnings against platform-funded discount expenditure.
+- Calculate SUB to assess commission remaining after platform-funded promotions.
+- Classify restaurants according to discount burn levels using a four-tier risk framework.
+- Identify restaurants requiring closer review based on discount exposure and financial contribution.
+- Analyse gross margin and its underlying revenue and cost components.
+- Compare financial performance across restaurant branches, chains, zones, and time periods.
+- Investigate potential delivery-cost, discount-efficiency, and settlement-related profit leakages.
+- Translate financial analysis into actionable recommendations for business improvement.
 
-## Dashboard 1: SUB & Discount Efficiency Analysis
+# Dashboard 1: SUB & Discount Burn Analysis
 
-### Objective
+## Objective
 
-Evaluate how much commission remains after deducting platform-funded promotions and vouchers, and identify restaurant segments requiring further commercial review.
+Evaluate how efficiently restaurant commission earnings cover platform-funded discounts and identify restaurants that may require changes to promotional strategies or commercial arrangements.
 
-### Core Calculation
+## Key Financial Metric: SUB
 
-**SUB = Restaurant Commission Amount − Discount Funded by the Platform**
+**SUB = RestaurantCommissionAmount − DiscountByPathao**
 
-In this project, SUB is a defined analytical measure rather than final business profit.
+Where:
 
-### Key Metrics
+- `RestaurantCommissionAmount` represents commission earned by the platform from restaurants.
+- `DiscountByPathao` represents platform-funded promotional and voucher discounts.
+
+SUB measures the commission remaining after deducting platform-funded discounts. It is a contribution indicator, not the final gross margin or net profit.
+
+## Burn% Calculation
+
+**Burn% = (DiscountByPathao ÷ RestaurantCommissionAmount) × 100**
+
+Burn% indicates the proportion of commission earnings consumed by platform-funded discounts.
+
+For example, if commission earnings are ৳100,000 and platform-funded discounts are ৳75,000, the Burn% is 75%, leaving a SUB of ৳25,000.
+
+## Burn% Risk Classification
+
+The dashboard includes an interactive Burn% filter that segments restaurants into four categories to support targeted financial investigation.
+
+| Category | Burn% Range | Business Interpretation |
+|---|---|---|
+| Healthy | Below 50% | Less than half of commission earnings are consumed by platform-funded discounts. |
+| Watch | 50% to below 80% | Discount expenditure is consuming a substantial share of commission and warrants monitoring. |
+| Risky | 80% to 100%, inclusive | Most or all commission earnings are consumed by discounts, leaving limited or no SUB. |
+| Loss Making | Above 100% | Platform-funded discounts exceed commission earnings, resulting in negative SUB for the measured scope. |
+
+**Classification rule:** Burn% below 50% is Healthy; 50% to below 80% is Watch; 80% through 100% is Risky; and above 100% is Loss Making.
+
+These categories describe discount exposure relative to commission, not overall business profitability. A restaurant classified as Healthy can still generate negative gross margin after delivery and other costs. Conversely, a restaurant with high Burn% may have additional revenue or commercial benefits that warrant further analysis.
+
+Orders or restaurants with zero commission require separate handling because their Burn% is undefined or not meaningful. They should not automatically be classified as Healthy.
+
+## Key Metrics
 
 - Total Commission Earned
 - Total Platform-Funded Discount Burn
@@ -57,123 +99,176 @@ In this project, SUB is a defined analytical measure rather than final business 
 - Discount Burn Percentage
 - SUB Margin Percentage
 - SUB per Order
+- Restaurant-Level SUB Ranking
 
-### Analysis Performed
+## Analytical Approach
 
-- Compare restaurant commission earnings with discount expenditure.
-- Rank restaurants by SUB and discount burn.
-- Identify restaurants with high discount burn relative to commission.
-- Compare SUB across restaurants, chains, and zones.
-- Track monthly SUB trends.
-- Investigate high-volume restaurants with weak SUB per order.
-- Evaluate promotion and voucher performance using the available financial measures.
+### 1. Restaurant-Level Commission vs. Discount Comparison
 
-### Business Value
+Compare commission earnings and platform-funded discount expenditure across restaurants and chains to identify segments where discount spending consumes a substantial proportion of commission.
 
-This analysis supports the investigation of potentially inefficient discount spending, unfavourable restaurant economics, and opportunities to review promotion structures or commercial arrangements.
+### 2. Burn% Risk Segmentation
 
-High discount burn is treated as a signal for investigation, not automatic evidence that a restaurant or promotion is unprofitable.
+Use the four-category Burn% filter to isolate Healthy, Watch, Risky, and Loss Making segments.
 
-## Dashboard 2: Gross Margin & Profit Leakage Analysis
+This allows stakeholders to move from an overall financial overview to a focused investigation of restaurants with elevated discount exposure.
 
-### Objective
+### 3. Restaurant and Chain Ranking
 
-Understand how commission revenue, discount expenditure, delivery fees, rider earnings, platform fees, and payment settlement charges contribute to overall gross margin.
+Rank restaurants by SUB, Burn%, and SUB per order to distinguish high-contribution restaurants from those requiring financial review.
 
-### Gross Margin Calculation
+### 4. Monthly SUB Trend Analysis
 
-Gross Margin = Restaurant Commission Amount − Platform-Funded Discount + Delivery Fee + Platform Fee − Rider Earnings − Online Settlement Charges
+Monitor how commission earnings, discount expenditure, and SUB change over time to identify deteriorating or improving discount efficiency.
 
-### Key Metrics
+### 5. High-Volume, Low-Contribution Investigation
+
+Identify restaurants that generate substantial order volume but contribute relatively little SUB. These restaurants may warrant further investigation into discount structure, commission arrangements, and order-level economics.
+
+## Business Problems This Dashboard Helps Investigate
+
+- Excessive platform-funded discounts relative to commission earnings.
+- Restaurants with negative SUB.
+- Restaurant chains with inconsistent discount efficiency across branches.
+- High-volume restaurants with weak SUB per order.
+- Deteriorating SUB performance over time.
+- Potential opportunities to review promotion rules, voucher funding, and commercial agreements.
+
+## Potential Business Actions
+
+The findings can support targeted actions such as reviewing promotion eligibility, evaluating discount-sharing arrangements, setting campaign-level financial limits, and negotiating improved commercial terms.
+
+The objective is not to reduce every discount indiscriminately, but to identify where promotional expenditure may be disproportionate to the financial contribution generated.
+
+# Dashboard 2: Gross Margin & Profitability Analysis
+
+## Objective
+
+Evaluate the contribution remaining after accounting for the revenue and cost components included in the project's gross margin calculation.
+
+## Gross Margin Calculation
+
+**Gross Margin = Restaurant Commission Amount − Discount by Pathao + Delivery Fee + Platform Fee − Rider Earnings − Online Settlement Charges**
+
+The dashboard breaks down these components to explain the financial drivers of overall margin.
+
+This is the project's defined gross margin measure and should not be interpreted as audited accounting gross profit without validation against the company's accounting policies.
+
+## Key Performance Indicators
 
 - Total Gross Margin
 - Gross Margin per Order
 - Gross Margin Percentage
 - Delivery Fee Revenue
 - Rider Cost
-- Settlement Cost
+- Online Settlement Cost
 - Delivery Cost Gap
 - Negative-Margin Order Count
 
-### Analysis Performed
+## Analytical Approach
 
-- Decompose gross margin using a waterfall chart.
-- Compare monthly gross margin trends.
-- Analyse profitability across restaurant chains and branches.
-- Investigate zones with relatively weak margin per order.
-- Compare delivery fee recovery with rider earnings.
-- Examine payment settlement costs across payment methods.
-- Identify individual orders and business segments with negative gross margin.
-- Reconcile the gross margin calculation against its underlying financial components.
+### 1. Margin Bridge Analysis
 
-### Business Value
+Use a waterfall chart to show how commission, discounts, delivery fees, platform fees, rider earnings, and settlement charges contribute to gross margin.
 
-This analysis helps explain why a business segment may generate commission revenue but contribute relatively little margin after the costs included in the model.
+This helps explain which financial components are increasing or reducing contribution.
 
-It supports further investigation of delivery subsidy exposure, discount expenditure, payment costs, and restaurant-level financial performance.
+### 2. Monthly Gross Margin Monitoring
 
-## Additional Analytical Opportunities
+Track gross margin over time to investigate whether changes are associated with increasing discount expenditure, lower commission earnings, higher rider costs, or other changes in the financial mix.
 
-The dataset also supports the development of:
+### 3. Restaurant and Chain Profitability
 
-- **Restaurant Portfolio Segmentation:** Classify restaurants by order volume, SUB, and gross margin to distinguish strong contributors from segments requiring review.
-- **Promotion Efficiency Analysis:** Compare commission, platform-funded discount burn, SUB, and gross margin across available promotion and voucher names.
-- **Zone-Level Economics:** Evaluate delivery fee recovery, rider cost per order, and gross margin across zones.
-- **Payment Cost Analysis:** Compare settlement charges and margin across customer payment methods.
-- **Month-over-Month Performance Analysis:** Identify changes in commission, discount expenditure, delivery costs, and gross margin.
-- **Financial Reconciliation Monitoring:** Investigate discrepancies, duplicated amounts, missing values, and inconsistent financial records.
-- **Basket Value Analysis:** Examine the relationship between food value, order size, discount burn, and margin per order.
+Compare gross margin and gross margin per order across restaurant branches and chains to identify strong contributors and segments requiring further review.
 
-These analyses are intended to generate testable business hypotheses. Any recommendations require validation against reliable financial and operational data.
+### 4. Zone-Level Delivery Economics
 
-## Technical Skills Demonstrated
+Compare customer delivery fees with rider earnings across zones and rider types to investigate potential delivery subsidy exposure.
 
-### Power BI & Data Modeling
+### 5. Payment Settlement Cost Analysis
+
+Examine online settlement charges across payment methods to identify differences in transaction costs and investigate potential savings opportunities.
+
+### 6. Negative-Margin Investigation
+
+Identify orders or business segments with negative gross margin and examine the underlying commission, discount, delivery fee, rider earnings, and settlement components.
+
+## Potential Profit Leakages to Investigate
+
+- Platform-funded discounts exceeding commission earnings.
+- Delivery fees insufficient to cover rider earnings.
+- High order volume accompanied by weak gross margin per order.
+- Restaurant branches with consistently weak contribution.
+- Settlement costs that materially reduce margin.
+- Unexpected discrepancies between calculated gross margin and its underlying financial components.
+
+These are potential investigation areas rather than confirmed financial losses. Any identified issue should be validated against the underlying transactions and financial definitions before action is taken.
+
+# Additional Analytical Opportunities
+
+The dataset provides a foundation for extending the dashboard into a broader profitability monitoring solution.
+
+| Analysis | Business Purpose |
+|---|---|
+| Restaurant Portfolio Segmentation | Categorise restaurants by order volume, SUB, and gross margin to prioritise investigations. |
+| Promotion & Voucher Efficiency | Compare commission, discount burn, SUB, and gross margin by promotion or voucher. |
+| Zone-Level Unit Economics | Identify zones with weak delivery fee recovery or low margin per order. |
+| Branch Performance Comparison | Compare branches within the same restaurant chain to identify operational or commercial differences. |
+| Month-over-Month Margin Decomposition | Explain changes in profitability through changes in revenue and cost components. |
+| Payment Cost Analysis | Compare settlement charges and margin across payment methods. |
+| Financial Reconciliation Monitoring | Investigate missing, duplicated, or inconsistent financial amounts. |
+| Basket Value & Contribution Analysis | Examine the relationship between order value, discount expenditure, and margin per order. |
+
+These extensions can help connect financial reporting with operational investigation and continuous performance improvement.
+
+# Technical Skills Demonstrated
+
+## Power BI & Data Visualization
 - Interactive dashboard development
-- KPI cards, slicers, drill-downs, and cross-filtering
-- Financial performance visualisation
-- Data modelling and date-based analysis
+- KPI cards, slicers, and cross-filtering
+- Restaurant and chain performance comparisons
+- Trend analysis and waterfall visualisation
+- Financial risk segmentation
 
-### DAX & Analytical Measures
+## DAX & Analytical Calculations
 - Calculated columns and measures
-- Financial aggregations and ratio calculations
 - SUB and gross margin calculations
-- Per-order performance metrics
-- Time-intelligence calculations, where implemented
+- Burn% classification logic
+- Ratio and per-order KPI development
 - Financial reconciliation measures
+- Time-based comparisons, where implemented
 
-### Business & Financial Analysis
+## Business & Financial Analysis
+- Commission and discount efficiency analysis
 - Profitability and contribution analysis
-- Discount burn monitoring
+- Cost-driver investigation
 - Restaurant and zone performance evaluation
-- Cost-driver analysis
-- Root-cause investigation
+- Financial risk identification
 - Data-driven business recommendations
 
-## Repository Contents
+# Project Methodology & Data Quality
 
-- `README.md` — Project overview, methodology, metrics, and business objectives
-- `images/dashboard-preview.png` — Dashboard screenshot
-- `powerbi/` — Power BI report file, if shared
-- `data/` — Synthetic sample dataset, if shared
-- `docs/` — KPI definitions and calculation methodology, if included
+Reliable profitability analysis requires more than visualisation. The following validation principles are important to this project:
 
-## Data Quality & Methodology
+- Confirm whether each financial record represents an order, order item, or transaction.
+- Prevent duplicate aggregation of order-level financial amounts.
+- Validate the funding responsibility of each discount component.
+- Handle zero or missing commission values appropriately in Burn% calculations.
+- Reconcile gross margin against its underlying revenue and cost components.
+- Define whether financial performance is analysed by order creation date or delivery date.
+- Distinguish observed associations from proven causal effects.
 
-Before interpreting profitability results, the analysis should establish the financial dataset's grain, verify that order-level amounts are not duplicated, confirm discount funding responsibility, and reconcile gross margin against its components.
+The project uses synthetic/generated data. Its results demonstrate an analytical approach and should not be interpreted as actual company performance.
 
-The gross margin measure represents the formula defined for this project. It should not be interpreted as audited accounting gross profit without confirmation of the company's accounting policies and financial definitions.
+# Project Outcome
 
-The dataset contains synthetic values, so do not present analytical patterns as verified findings about a real food-delivery business.
+This project demonstrates how financial data can be transformed into an interactive business intelligence solution that supports:
 
-## Project Outcome
+- Structured monitoring of restaurant-level financial performance.
+- Identification of high discount-burn and negative-SUB segments.
+- Investigation of delivery and settlement cost drivers.
+- Comparison of SUB and gross margin to understand broader order economics.
+- Prioritisation of financial issues for further investigation.
+- More informed decisions around promotional expenditure and profitability improvement.
 
-The project demonstrates how a financial dataset can be structured into an interactive business intelligence solution that connects revenue, discount expenditure, delivery economics, and margin performance.
-
-It highlights how analytical thinking identifies potential business risks, investigates financial drivers, and supports better-informed decisions.
-
-## Author
-
-**Power BI | Business Intelligence | Financial & Business Analysis**
-
-Focused on transforming business data into meaningful insights that support profitability analysis, performance evaluation, and strategic decision-making.
+The central objective is to move beyond descriptive reporting and develop a structured approach to identifying financial risks, investigating their drivers, and evaluating potential
